@@ -21,7 +21,6 @@ The pipeline has been running in production against real patient records for thr
 | Metric | Value |
 |---|---:|
 | Pages processed | 8,735 |
-| Tokens consumed | ~4,477,650 |
 | Document runs | ~500–550 |
 | Total Azure cost | $27.30 |
 | **Blended cost per document** | **~$0.05** |
@@ -30,11 +29,10 @@ The pipeline has been running in production against real patient records for thr
 
 | Metric | Value |
 |---|---:|
-| Pages processed | 15,639 |
-| Tokens consumed | ~8,908,663 |
-| Document runs | ~789 |
-| Total Azure cost | $27.30 |
-| **Blended cost per document** | **~$0.0845** |
+| Pages processed | 15,978 |
+| Document runs | ~1,023 |
+| Total Azure cost | $89.10 |
+| **Blended cost per document** | **~$0.0871** |
 
 Cost per document is logged and queryable after every run. Enterprise PTU pricing eliminates per-token charges at scale, driving effective cost toward near-zero as volume grows.
 
