@@ -18,21 +18,17 @@ The initial workflow automates inpatient discharge summarization, but the archit
 
 The pipeline has been running in production against real patient records for three months since initial deployment. Figures pulled directly from Azure Cost Management:
 
-| Metric | Value |
-|---|---:|
-| Pages processed | 8,735 |
-| Document runs | ~500–550 |
-| Total Azure cost | $27.30 |
-| **Blended cost per document** | **~$0.05** |
-
 ### Live Production Data - 93 day historical view
 
+*Azure actuals for 2026-07-19 to 2026-10-20, generated 2026-10-20.*
+
 | Metric | Value |
 |---|---:|
-| Pages processed | 26,935 |
-| Document runs | 2117 |
-| Total Azure cost | $211.60 |
-| **Blended cost per document** | **~$0.1000** |
+| Pages processed | 28,604 |
+| Document runs | 1,612 |
+| Tokens consumed | 20.4M |
+| Total Azure cost | $371.22 |
+| **Blended cost per document** | **~$0.23** |
 
 Cost per document is logged and queryable after every run. Enterprise PTU pricing eliminates per-token charges at scale, driving effective cost toward near-zero as volume grows.
 
