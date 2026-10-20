@@ -18,21 +18,31 @@ The initial workflow automates inpatient discharge summarization, but the archit
 
 The pipeline has been running in production against real patient records for three months since initial deployment. Figures pulled directly from Azure Cost Management:
 
-### Live Production Data - 93 day historical view
-
-*Azure actuals for 2026-07-19 to 2026-10-20, generated 2026-10-20.*
-
 | Metric | Value |
 |---|---:|
-| Pages processed | 28,604 |
-| Document runs | 1,612 |
-| Tokens consumed | 20.4M |
-| Total Azure cost | $371.22 |
-| **Blended cost per document** | **~$0.23** |
+| Pages processed | 8,735 |
+| Document runs | ~500–550 |
+| Total Azure cost | $27.30 |
+| **Blended cost per document** | **~$0.05** |
 
-Cost per document is logged and queryable after every run. Enterprise PTU pricing eliminates per-token charges at scale, driving effective cost toward near-zero as volume grows.
+### Live Production Data - 93 day historical view
 
-The next three months are set for scaling the volume up by an order of approximately 8x
+Billed Azure actuals for 2026-07-19 to 2026-10-20 from Azure Cost Management, generated 2026-10-20:
+
+| Period | Azure OpenAI | Document Intelligence | Total billed | Avg per day |
+|---|---:|---:|---:|---:|
+| Jul 19 to Aug 31 | $113.62 | $76.46 | $190.09 | $4.32 |
+| Sep 1 to Sep 30 | $68.97 | $44.92 | $113.90 | $3.80 |
+| Oct 1 to Oct 20 | $41.63 | $25.59 | $67.23 | $3.36 |
+| **93-day total** | **$224.22** | **$146.97** | **$371.22** | **$3.99** |
+
+*Totals include $0.03 of Key Vault charges.*
+
+Daily spend fell in each period, and the split between summarization (Azure OpenAI) and OCR (Document Intelligence) held steady at roughly 60/40. Lower spend is not yet the same as lower unit cost: cost per document for this window is being reconciled against Azure Monitor usage counts and will be published once verified.
+
+Cost per document is logged and queryable after every run. As volume grows, provisioned throughput (PTU) becomes an option for the model side: it replaces per-token billing with a fixed hourly reservation, which lowers unit cost once sustained utilization passes break-even.
+
+Volume is planned to scale approximately 8x over the next three months.
 
 **First validated production run** - 11-page scanned fax (GFI FaxMaker, no native text layer):
 - Full summary produced, no truncation, ~11–12 seconds end-to-end
@@ -121,4 +131,3 @@ Operationalizing AI workflows requires more than working code. This project incl
 | [Reusable AI Workflow Patterns](https://github.com/Aptica-Solutions/a-portfolio-clinical-summary/wiki/Reusable-AI-Workflow-Patterns) | Pattern library, component map, and adaptation guide |
 | [Operational Adoption and Impact](https://github.com/Aptica-Solutions/a-portfolio-clinical-summary/wiki/Operational-Adoption-And-Impact) | Metrics, adoption artifacts, and enablement approach |
 | [Executive Brief](https://github.com/Aptica-Solutions/a-portfolio-clinical-summary/wiki/Executive-Brief) | Full production data, cost breakdown, first validated run, and strategic value |
-
