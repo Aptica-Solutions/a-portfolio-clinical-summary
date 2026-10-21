@@ -25,6 +25,8 @@ The pipeline has been running in production against real patient records for thr
 | Total Azure cost | $27.30 |
 | **Blended cost per document** | **~$0.05** |
 
+*Document runs in this table are an estimate made before the counting method below; the cost per document is not re-verified.*
+
 ### Live Production Data - 93 day historical view
 
 Billed Azure actuals for 2026-07-19 to 2026-10-20 from Azure Cost Management, generated 2026-10-20:
@@ -38,7 +40,14 @@ Billed Azure actuals for 2026-07-19 to 2026-10-20 from Azure Cost Management, ge
 
 *Totals include $0.03 of Key Vault charges.*
 
-Daily spend fell in each period, and the split between summarization (Azure OpenAI) and OCR (Document Intelligence) held steady at roughly 60/40. Lower spend is not yet the same as lower unit cost: cost per document for this window is being reconciled against Azure Monitor usage counts and will be published once verified.
+| Metric | Value |
+|---|---:|
+| Documents processed | 4,003 |
+| Pages processed | 87,187 |
+| Total billed | $371.22 |
+| **Blended cost per document** | **~$0.09** |
+
+Daily spend fell in each period, and the split between summarization (Azure OpenAI) and OCR (Document Intelligence) held steady at roughly 60/40. Documents are counted from Azure Monitor as Document Intelligence analyze calls, one per document submitted; a document reprocessed counts again. Documents in this window average about 22 pages, and cost per page is about $0.004.
 
 Cost per document is logged and queryable after every run. As volume grows, provisioned throughput (PTU) becomes an option for the model side: it replaces per-token billing with a fixed hourly reservation, which lowers unit cost once sustained utilization passes break-even.
 
